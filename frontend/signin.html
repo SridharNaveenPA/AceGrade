@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        @font-face {
+            font-family: sfpror;
+            src: url(FONTS/sf-pro-display/SFPRODISPLAYREGULAR.OTF);
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+        .login{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .mm{
+            position: absolute;
+            z-index: -999;
+            top: -500px;
+            left: 210px;
+            transform: scale(1.3);
+            transform: rotate(90deg);
+        }
+
+        .middle{
+            width: 1000px;
+            height: 550px;
+            background-color: rgb(0, 0, 0);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .image{
+            width: 450px;
+            height: 537px;
+            margin-left: 7px;
+            border-radius: 25px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .image img{
+            transform: rotate(90deg);
+            padding-bottom: 1px;
+        }
+
+        .right{
+            width: 550px;
+            height: 537px;
+            margin-left: 7px;
+            margin-right: 7px;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            position: relative;
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin-top: 25px;
+            font-family: 'sfpror';
+        }
+
+        .name{
+            width: 450px;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .right h1{
+            font-size: 30px;
+        }
+
+        form label{
+            font-weight: lighter;
+            font-size: 15px;
+            color: rgb(255, 255, 255);
+        }
+
+        form input{
+            background-color: rgb(0, 0, 0);
+            border: 1px solid rgb(17, 14, 14);
+            color: white;
+        }
+
+        form input[id="fname"]{
+            width: 300px;
+        }
+
+        form input[id="lname"]{
+            width: 100px;
+        }
+
+        form input[id="fname"],
+        form input[id="lname"]{
+            border-radius: 10px;
+            height: 30px;
+            padding-left: 10px;
+            margin-top: -10px;
+        }
+
+        form input[id="reg"],
+        form input[id="dept"],
+        form input[id="cid"],
+        form input[id="pwd"]{
+            border-radius: 10px;
+            width: 438px;
+            height: 30px;
+            padding-left: 10px;
+            margin-top: -10px;
+        }
+
+        form select{
+            border-radius: 10px;
+            width: 450px;
+            height: 35px;
+            padding-left: 10px;
+            margin-top: -10px;
+            background-color: rgb(0, 0, 0);
+            color: #808080;
+            border: 1px solid rgb(17, 14, 14);
+        }
+
+        form input[id="fname"]{
+            margin-top: 10px;
+        }
+
+        form input[id="lname"]{
+            width: 100px;
+            margin-top: 10px;
+        }
+
+        form input[type="submit"]{
+            background-color: #fe643a;
+            border-radius: 30px;
+            margin-top: 10px;
+            color:black;
+            width: 80px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <section class="login">
+        <img class="mm" src="IMAGES/gra.jpg" alt="">
+        <div class="middle">
+            <div class="image">
+                <img src="IMAGES/gra.jpg" alt="">
+            </div>
+            <div class="right">
+                <form>
+                    <div class="name">
+                        <div class="namee">
+                            <label for="fname">First Name:</label><br>
+                            <input type="text" id="fname" name="fname" placeholder="First Name"><br>
+                        </div>
+                        <div class="namee">
+                            <label for="lname">Last Name:</label><br>
+                            <input type="text" id="lname" name="lname" placeholder="Last Name"><br>
+                        </div>
+                    </div>
+                    <label for="reg">Register Number:</label><br>
+                    <input type="number" id="reg" name="reg" placeholder="20XXXXXXXX"><br>
+                    <label for="dept">Department:</label><br>
+                    <select id="dept" name="dept">
+                        <option value="" disabled selected>Select your department</option>
+                        <option value="cse">Information Technology</option>
+                        <option value="ece">Aeronautical Engineering</option>
+                        <option value="ece">Automobile Engineering</option>
+                        <option value="eee">Electronics Engineering</option>
+                        <option value="ece">Instrumentation Engineering</option>
+                        <option value="ece">Production Technology</option>
+                        <option value="ece">Rubber & Plastic Technology</option>
+                        <option value="ece">Computer Technology</option>
+                    </select><br>
+                    <label for="cid">College Email ID</label><br>
+                    <input type="text" id="cid" name="cid" placeholder="Enter your or College E-mail"><br>
+                    <label for="pwd">Password:</label><br>
+                    <input type="password" id="pwd" name="pwd" placeholder="Enter your Password"><br>
+                    <input type="submit" value="Submit" style="margin-left: 50%; transform: translateX(-50%);">
+                </form>
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>
