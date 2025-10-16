@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AceGrade</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        @font-face {
+            font-family: sfpror;
+            src: url(FONTS/sf-pro-display/SFPRODISPLAYREGULAR.OTF);
+        }
+
+        @font-face {
+            font-family: sfprob;
+            src: url(FONTS/sf-pro-display/SFPRODISPLAYBOLD.OTF);
+        }
+
+        .login{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .mm{
+            position: absolute;
+            z-index: -999;
+            top: -500px;
+            left: 210px;
+            transform: scale(1.3);
+            transform: rotate(90deg);
+        }
+
+        .middle{
+            width: 1000px;
+            height: 550px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .image{
+            width: 450px;
+            height: 537px;
+            margin-left: 7px;
+            border-radius: 25px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image img{
+            transform: rotate(90deg);
+            padding-bottom: 1px;
+        }
+
+        .right{
+            width: 550px;
+            height: 537px;
+            margin-left: 7px;
+            margin-right: 7px;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .login-form{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            font-family: 'sfpror';
+            width: 450px;
+        }
+
+        .right h1{
+            font-size: 35px;
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'sfprob';
+        }
+
+        .login-form label{
+            font-weight: lighter;
+            font-size: 15px;
+            color: rgb(255, 255, 255);
+            margin-bottom: 5px;
+        }
+
+        .login-form input{
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 10px;
+            width: 100%;
+            height: 40px;
+            padding-left: 15px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .login-form input:focus{
+            outline: none;
+            border-color: #fe643a;
+            box-shadow: 0 0 10px rgba(254, 100, 58, 0.3);
+        }
+
+        .login-form input::placeholder{
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .login-form input[type="submit"]{
+            background: linear-gradient(45deg, #fe643a, #ff8a65);
+            border: none;
+            border-radius: 25px;
+            margin-top: 20px;
+            color: white;
+            width: 120px;
+            height: 45px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: center;
+        }
+
+        .login-form input[type="submit"]:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(254, 100, 58, 0.4);
+        }
+
+        .login-form input[type="submit"]:active{
+            transform: translateY(0);
+        }
+
+        .message{
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: 'sfpror';
+            font-size: 14px;
+        }
+
+        .success-message{
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            border: 1px solid #4caf50;
+        }
+
+        .error-message{
+            background-color: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+            border: 1px solid #f44336;
+        }
+
+        .loading{
+            display: none;
+            text-align: center;
+            color: white;
+            font-family: 'sfpror';
+        }
+
+        .back-link{
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-family: 'sfpror';
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover{
+            color: #fe643a;
+        }
+
+        @media (max-width: 768px) {
+            .middle{
+                width: 90%;
+                height: auto;
+                flex-direction: column;
+            }
+            
+            .image{
+                display: none;
+            }
+            
+            .right{
+                width: 100%;
+                height: auto;
+                padding: 20px;
+            }
+            
+            .login-form{
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="login">
+        <img class="mm" src="IMAGES/gra.jpg" alt="">
+        <div class="middle">
+            <div class="image">
+                <img src="IMAGES/gra.jpg" alt="">
+            </div>
+            <div class="right">
+                <a href="index.html" class="back-link">← Back to Home</a>
+                <h1>Welcome Back</h1>
+                <form class="login-form" id="loginForm">
+                    <div id="messageContainer"></div>
+                    <div class="loading" id="loading">
+                        <p>Logging in...</p>
+                    </div>
+                    
+                    <label for="collegeEmail">College Email:</label>
+                    <input type="email" id="collegeEmail" name="collegeEmail" placeholder="Enter your college email" required>
+                    
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    
+                    <input type="submit" value="LOGIN">
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const messageContainer = document.getElementById('messageContainer');
+            const loading = document.getElementById('loading');
+            const submitButton = document.querySelector('input[type="submit"]');
+            
+            // Show loading state
+            loading.style.display = 'block';
+            submitButton.disabled = true;
+            submitButton.value = 'LOGGING IN...';
+            messageContainer.innerHTML = '';
+            
+            // Get form data
+            const collegeEmail = document.getElementById('collegeEmail').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch('http://localhost:8081/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        collegeEmail: collegeEmail,
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Show success message
+                    messageContainer.innerHTML = `
+                        <div class="message success-message">
+                            <strong>Login Successful!</strong><br>
+                            Welcome back, ${data.userInfo.firstName} ${data.userInfo.lastName}!
+                        </div>
+                    `;
+                    
+                    // Store user info in localStorage
+                    localStorage.setItem('userInfo', JSON.stringify(data.userInfo));
+                    localStorage.setItem('isLoggedIn', 'true');
+                    
+                    // Redirect to dashboard or main page after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 2000);
+                    
+                } else {
+                    // Show error message
+                    messageContainer.innerHTML = `
+                        <div class="message error-message">
+                            <strong>Login Failed!</strong><br>
+                            ${data.message}
+                        </div>
+                    `;
+                }
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                messageContainer.innerHTML = `
+                    <div class="message error-message">
+                        <strong>Connection Error!</strong><br>
+                        Unable to connect to the server. Please check your internet connection and try again.
+                    </div>
+                `;
+            } finally {
+                // Hide loading state
+                loading.style.display = 'none';
+                submitButton.disabled = false;
+                submitButton.value = 'LOGIN';
+            }
+        });
+    </script>
+</body>
+</html>

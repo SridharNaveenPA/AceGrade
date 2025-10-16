@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AceGrade</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        @font-face {
+            font-family: sfpror;
+            src: url(FONTS/sf-pro-display/SFPRODISPLAYREGULAR.OTF);
+        }
+
+        @font-face {
+            font-family: sfprob;
+            src: url(FONTS/sf-pro-display/SFPRODISPLAYBOLD.OTF);
+        }
+
+        body{
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'sfpror';
+        }
+
+        .dashboard{
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header{
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome{
+            color: white;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-family: 'sfprob';
+        }
+
+        .user-info{
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .logout-btn{
+            background: linear-gradient(45deg, #fe643a, #ff8a65);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 25px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(254, 100, 58, 0.4);
+        }
+
+        .content{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card{
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        .card h3{
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-family: 'sfprob';
+            color: #fe643a;
+        }
+
+        .card p{
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .back-link{
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover{
+            color: #fe643a;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard{
+                padding: 10px;
+            }
+            
+            .header{
+                padding: 20px;
+            }
+            
+            .welcome{
+                font-size: 24px;
+            }
+            
+            .content{
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        
+        <div class="header">
+            <h1 class="welcome" id="welcomeMessage">Welcome to AceGrade!</h1>
+            <div class="user-info" id="userInfo"></div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+        
+        <div class="content">
+            <div class="card">
+                <h3>📚 Study Resources</h3>
+                <p>Access your personalized study materials, notes, and resources tailored to your department and courses.</p>
+            </div>
+            
+            <div class="card">
+                <h3>🛠️ Learning Tools</h3>
+                <p>Utilize our advanced learning tools including flashcards, practice tests, and interactive study sessions.</p>
+            </div>
+            
+            <div class="card">
+                <h3>👥 Study Groups</h3>
+                <p>Connect with fellow students from your department and collaborate on group projects and study sessions.</p>
+            </div>
+            
+            <div class="card">
+                <h3>📊 Progress Tracking</h3>
+                <p>Monitor your academic progress with detailed analytics and performance insights.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const userInfo = localStorage.getItem('userInfo');
+            
+            if (!isLoggedIn || !userInfo) {
+                // Redirect to login page if not logged in
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Display user information
+            const user = JSON.parse(userInfo);
+            document.getElementById('welcomeMessage').textContent = `Welcome back, ${user.firstName}!`;
+            document.getElementById('userInfo').innerHTML = `
+                <strong>Name:</strong> ${user.firstName} ${user.lastName}<br>
+                <strong>Register Number:</strong> ${user.registerNumber}<br>
+                <strong>Department:</strong> ${user.department}<br>
+                <strong>Email:</strong> ${user.collegeEmail}
+            `;
+        }
+        
+        // Logout function
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userInfo');
+            window.location.href = 'login.html';
+        }
+        
+        // Check login status when page loads
+        checkLoginStatus();
+    </script>
+</body>
+</html>
