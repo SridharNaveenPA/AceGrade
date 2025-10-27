@@ -1,6 +1,14 @@
+C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\dto\SubjectResponse.java
+C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\entity\Subject.java
+C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\dto\StudyResourceRequest.java
+C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\dto\LoginResponse.java
+C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\controller\StudyResourceController.java
+C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\entity\StudyResource.java
+C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\dto\LoginRequest.java
+C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\dto\StudyResourceResponse.java
 C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\repository\UserRepository.java
 C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\entity\User.java
-C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\dto\LoginResponse.java
 C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\AceGradeApplication.java
-C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\dto\LoginRequest.java
+C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\repository\StudyResourceRepository.java
+C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\repository\SubjectRepository.java
 C:\Users\SridharNaveenPA\Documents\GitHub\AceGrade\backend\src\main\java\com\acegrade\controller\LoginController.java

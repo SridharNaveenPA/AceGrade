@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Resources - AceGrade</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="study-resources.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html">AceGrade</a>
+        </div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="study-resources.html" class="active">Study Resources</a>
+            <a href="login.html">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="study-container">
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <h2>Study Resources</h2>
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label for="semester">Semester</label>
+                    <select id="semester" class="filter-dropdown">
+                        <option value="">Select Semester</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="department">Department</label>
+                    <select id="department" class="filter-dropdown">
+                        <option value="">Select Department</option>
+                        <option value="IT">Information Technology</option>
+                        <option value="CT">Computer Technology</option>
+                        <option value="PT">Production Technology</option>
+                        <option value="EI">Electronics and Instrumentaion</option>
+                        <option value="ECE">Electronics and Communication</option>
+                        <option value="AERO">Aerospace Engineering</option>
+                        <option value="RA">Robotics and Automation</option>
+                        <option value="AIDS">AI and DS</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="regulation">Regulation</label>
+                    <select id="regulation" class="filter-dropdown">
+                        <option value="">Select Regulation</option>
+                        <option value="R2019">R2019</option>
+                        <option value="R2023">R2023</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Left Sidebar for Subjects -->
+            <div class="sidebar">
+                <h3>Subjects</h3>
+                <div id="subjects-list" class="subjects-list">
+                    <p class="no-selection">Please select semester, department, and regulation to view subjects</p>
+                </div>
+            </div>
+
+            <!-- Right Content Area -->
+            <div class="content-area">
+                <!-- Search and Add Button -->
+                <div class="content-header">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-notes" placeholder="Search notes...">
+                    </div>
+                    <button class="add-notes-btn" onclick="openAddNotesModal()">
+                        <i class="fas fa-plus"></i>
+                        Add Notes
+                    </button>
+                </div>
+
+                <!-- Notes Grid -->
+                <div id="notes-grid" class="notes-grid">
+                    <div class="no-notes">
+                        <i class="fas fa-book-open"></i>
+                        <p>No notes available. Select filters to view study materials.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Notes Modal -->
+    <div id="add-notes-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Study Notes</h3>
+                <span class="close" onclick="closeAddNotesModal()">&times;</span>
+            </div>
+            <form id="add-notes-form" class="modal-body">
+                <div class="form-group">
+                    <label for="modal-semester">Semester *</label>
+                    <select id="modal-semester" required>
+                        <option value="">Select Semester</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="modal-department">Department *</label>
+                    <select id="modal-department" required>
+                        <option value="">Select Department</option>
+                        <option value="IT">Information Technology</option>
+                        <option value="CT">Computer Technology</option>
+                        <option value="PT">Production Technology</option>
+                        <option value="EI">Electronics and Instrumentaion</option>
+                        <option value="ECE">Electronics and Communication</option>
+                        <option value="AERO">Aerospace Engineering</option>
+                        <option value="RA">Robotics and Automation</option>
+                        <option value="AIDS">AI and DS</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="modal-regulation">Regulation *</label>
+                    <select id="modal-regulation" required>
+                        <option value="">Select Regulation</option>
+                        <option value="R2019">R2019</option>
+                        <option value="R2023">R2023</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject-name">Subject Name/Course Code *</label>
+                    <input type="text" id="subject-name" placeholder="Enter subject name or course code" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contributor-name">Contributor Name *</label>
+                    <input type="text" id="contributor-name" placeholder="Enter your name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes-description">Description</label>
+                    <textarea id="notes-description" placeholder="Brief description of the notes (e.g., Week 1-10, Important topics covered)"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pdf-file">Upload PDF *</label>
+                    <input type="file" id="pdf-file" accept=".pdf" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" onclick="closeAddNotesModal()" class="cancel-btn">Cancel</button>
+                    <button type="submit" class="submit-btn">Upload Notes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="study-resources.js"></script>
+</body>
+</html>

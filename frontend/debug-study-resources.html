@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Study Resources</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #1a1a1a;
+            color: white;
+        }
+        .debug-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            background: #2a2a2a;
+        }
+        button {
+            background: #4a9eff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #3a8eef;
+        }
+        pre {
+            background: #000;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .error {
+            color: #ff6b6b;
+        }
+        .success {
+            color: #51cf66;
+        }
+    </style>
+</head>
+<body>
+    <h1>Study Resources Debug Page</h1>
+    
+    <div class="debug-section">
+        <h2>1. Test Backend Connection</h2>
+        <button onclick="testConnection()">Test Connection</button>
+        <div id="connectionResult"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>2. Get All Study Resources</h2>
+        <button onclick="getAllResources()">Get All Resources</button>
+        <div id="allResourcesResult"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>3. Test Filtered Search</h2>
+        <label>Semester: <input type="number" id="testSemester" placeholder="e.g., 1"></label><br><br>
+        <label>Department: <input type="text" id="testDepartment" placeholder="e.g., IT"></label><br><br>
+        <label>Regulation: <input type="text" id="testRegulation" placeholder="e.g., R2019"></label><br><br>
+        <label>Subject: <input type="text" id="testSubject" placeholder="e.g., Data Structures"></label><br><br>
+        <button onclick="testFilteredSearch()">Test Filtered Search</button>
+        <div id="filteredResult"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>4. Get Subjects</h2>
+        <label>Semester: <input type="number" id="subjectSemester" placeholder="e.g., 1"></label><br><br>
+        <label>Department: <input type="text" id="subjectDepartment" placeholder="e.g., IT"></label><br><br>
+        <label>Regulation: <input type="text" id="subjectRegulation" placeholder="e.g., R2019"></label><br><br>
+        <button onclick="getSubjects()">Get Subjects</button>
+        <div id="subjectsResult"></div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8080/api/study-resources';
+        
+        async function testConnection() {
+            const resultDiv = document.getElementById('connectionResult');
+            try {
+                const response = await fetch('http://localhost:8080/api/auth/health');
+                const text = await response.text();
+                resultDiv.innerHTML = `<div class="success">✅ Backend is running: ${text}</div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Connection failed: ${error.message}</div>`;
+            }
+        }
+        
+        async function getAllResources() {
+            const resultDiv = document.getElementById('allResourcesResult');
+            try {
+                const response = await fetch(`${API_BASE_URL}/all`);
+                const resources = await response.json();
+                resultDiv.innerHTML = `
+                    <div class="success">✅ Found ${resources.length} resources</div>
+                    <pre>${JSON.stringify(resources, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            }
+        }
+        
+        async function testFilteredSearch() {
+            const resultDiv = document.getElementById('filteredResult');
+            const semester = document.getElementById('testSemester').value;
+            const department = document.getElementById('testDepartment').value;
+            const regulation = document.getElementById('testRegulation').value;
+            const subject = document.getElementById('testSubject').value;
+            
+            try {
+                const params = new URLSearchParams();
+                if (semester) params.append('semester', semester);
+                if (department) params.append('department', department);
+                if (regulation) params.append('regulation', regulation);
+                if (subject) params.append('subjectName', subject);
+                
+                const response = await fetch(`${API_BASE_URL}?${params}`);
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    resultDiv.innerHTML = `<div class="error">❌ Error ${response.status}: ${errorText}</div>`;
+                    return;
+                }
+                const resources = await response.json();
+                resultDiv.innerHTML = `
+                    <div class="success">✅ Found ${resources.length} resources with filters</div>
+                    <pre>${JSON.stringify(resources, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            }
+        }
+        
+        async function getSubjects() {
+            const resultDiv = document.getElementById('subjectsResult');
+            const semester = document.getElementById('subjectSemester').value;
+            const department = document.getElementById('subjectDepartment').value;
+            const regulation = document.getElementById('subjectRegulation').value;
+            
+            try {
+                const params = new URLSearchParams();
+                if (semester) params.append('semester', semester);
+                if (department) params.append('department', department);
+                if (regulation) params.append('regulation', regulation);
+                
+                const response = await fetch(`${API_BASE_URL}/subjects?${params}`);
+                const subjects = await response.json();
+                resultDiv.innerHTML = `
+                    <div class="success">✅ Found ${subjects.length} subjects</div>
+                    <pre>${JSON.stringify(subjects, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>

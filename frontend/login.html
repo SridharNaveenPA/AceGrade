@@ -263,7 +263,10 @@
             const password = document.getElementById('password').value;
             
             try {
-                const response = await fetch('http://localhost:8081/api/auth/login', {
+                console.log('Attempting to connect to:', 'http://localhost:8080/api/auth/login');
+                console.log('Login data:', { collegeEmail: collegeEmail, password: '***' });
+                
+                const response = await fetch('http://localhost:8080/api/auth/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -273,6 +276,9 @@
                         password: password
                     })
                 });
+                
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
                 
                 const data = await response.json();
                 
@@ -306,10 +312,20 @@
                 
             } catch (error) {
                 console.error('Login error:', error);
+                
+                let errorMessage = 'Unable to connect to the server. Please check your internet connection and try again.';
+                
+                if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    errorMessage = 'Cannot connect to the backend server. Please make sure the backend is running on port 8080.';
+                } else if (error.message.includes('Failed to fetch')) {
+                    errorMessage = 'Network error. Please check if the backend server is running.';
+                }
+                
                 messageContainer.innerHTML = `
                     <div class="message error-message">
                         <strong>Connection Error!</strong><br>
-                        Unable to connect to the server. Please check your internet connection and try again.
+                        ${errorMessage}<br>
+                        <small>Error details: ${error.message}</small>
                     </div>
                 `;
             } finally {
