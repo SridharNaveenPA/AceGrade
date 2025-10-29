@@ -9,39 +9,39 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 	<style>
 		/* Minimal page-specific styles (reuses site styles where possible) */
-		.calculator-container { max-width: 1100px; margin: 40px auto; padding: 20px; }
-		.section-card { background: #11131a; border: 1px solid #1e2230; border-radius: 14px; padding: 16px; margin-bottom: 16px; }
+		.calculator-container { max-width: 1100px; margin: 40px auto; padding: 20px; padding-top: 70px;}
+		.section-card { background-color: black; border: 1px solid #1e2230; border-radius: 14px; padding: 16px; margin-bottom: 16px; }
 		.flex { display: flex; gap: 12px; flex-wrap: wrap; }
 		.field { display: flex; flex-direction: column; gap: 6px; min-width: 180px; }
 		.field label { color: #c9d1d9; font-size: 14px; }
-		.field input, .field select { background: #0e1117; border: 1px solid #2a3142; color: #e6edf3; padding: 10px 12px; border-radius: 10px; outline: none; }
+		.field input, .field select { background-color: black; border: 1px solid #2a3142; color: #e6edf3; padding: 10px 12px; border-radius: 10px; outline: none; }
 		.field input:focus, .field select:focus { border-color: #3b82f6; }
 		.controls { display: flex; gap: 10px; align-items: center; }
-		.button { background: #2563eb; color: white; border: none; border-radius: 10px; padding: 10px 14px; cursor: pointer; }
-		.button.secondary { background: #334155; }
+		.button { background-color: red; color: white; border: none; border-radius: 10px; padding: 10px 14px; cursor: pointer; }
+		.button.secondary { background: red; }
 		.button.icon { display: inline-flex; align-items: center; gap: 6px; }
-		.semester { border: 1px dashed #2a3142; padding: 12px; border-radius: 12px; background: #0c0f15; }
-		.semester-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+		.semester { border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 12px; background-color: #000000; }
+		.semester-header { background-color: black; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;  }
 		.courses { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; align-items: start; }
 		.course-row { display: contents; }
 		.course-actions { grid-column: 1 / -1; display: flex; gap: 8px; margin: 6px 0 10px; }
 		.remove-btn { background: #7f1d1d; }
-		.result-card { background: #0b1220; border: 1px solid #1f2a44; padding: 16px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; }
+		.result-card { background-color: black; border: 1px solid rgba(255, 255, 255, 0.1); padding: 16px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; }
 		.result-value { font-size: 32px; font-weight: 700; color: #22c55e; }
 		.toggle { display: inline-flex; align-items: center; gap: 8px; color: #cbd5e1; }
 		.small { font-size: 12px; color: #94a3b8; }
 	</style>
 </head>
 <body>
-	<nav class="navbar">
-		<div class="nav-brand">
-			<a href="index.html">AceGrade</a>
-		</div>
-		<div class="nav-links">
-			<a href="dashboard.html">Dashboard</a>
-			<a href="login.html">Logout</a>
-		</div>
-	</nav>
+	<div class="navbar">
+            <a href="">Resources</a>
+            <a href="">Tools</a>
+            <a href="">Study Group</a>
+            <a href="">About Us</a>
+            <div class="dabba" style="background-color: red; width: 70px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 20px;">
+                <a href="index.html">Logout</a>
+            </div>
+    </div>
 
 	<div class="calculator-container">
 		<div class="filter-section" style="margin-bottom: 16px;">

@@ -24,7 +24,7 @@
         }
 
         body{
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: black;
             min-height: 100vh;
             font-family: 'sfpror';
         }
@@ -42,6 +42,8 @@
             margin-bottom: 30px;
             backdrop-filter: blur(10px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
         }
 
         .welcome{
@@ -58,7 +60,7 @@
         }
 
         .logout-btn{
-            background: linear-gradient(45deg, #fe643a, #ff8a65);
+            background-color: red;
             border: none;
             border-radius: 25px;
             padding: 12px 25px;
@@ -67,10 +69,13 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: absolute;
+            left: 1050px;
+            top: 35px;
+            
         }
 
         .logout-btn:hover{
-            transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(254, 100, 58, 0.4);
         }
 
@@ -88,13 +93,14 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .card h3{
             font-size: 20px;
             margin-bottom: 15px;
             font-family: 'sfprob';
-            color: #fe643a;
+            color: white;
         }
 
         .card p{
@@ -147,22 +153,22 @@
         <div class="content">
             <a href="study-resources.html">
             <div class="card">
-                <h3>📚 Study Resources</h3>
-                <p>Access your personalized study materials, notes, and resources tailored to your department and courses.</p>
+                <h3>Study Resources</h3>
+                <p><i>Access your personalized study materials, notes, and resources tailored to your department and courses.</i></p>
             </div>
             </a>
 
             <a href="cgpa-calculator.html">
             <div class="card">
                 <h3>CGPA Calculator</h3>
-                <p>Calculate your CGPA based on your current semester grades.</p>
+                <p><i>Calculate your CGPA based on your current semester grades.</i></p>
             </div>
             </a>
             
             <a href="qpapers.html">
             <div class="card">
                 <h3>Question Papers</h3>
-                <p>Access valuable Previous Year Question papers all at one place.</p>
+                <p><i>Access valuable Previous Year Question papers all at one place.</i></p>
             </div>
             </a>
         </div>
