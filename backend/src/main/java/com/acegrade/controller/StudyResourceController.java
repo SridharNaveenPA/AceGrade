@@ -1,6 +1,5 @@
 package com.acegrade.controller;
 
-import com.acegrade.dto.StudyResourceRequest;
 import com.acegrade.dto.StudyResourceResponse;
 import com.acegrade.dto.SubjectResponse;
 import com.acegrade.entity.StudyResource;
@@ -91,15 +90,15 @@ public class StudyResourceController {
         
         // Use simpler query if no search term, otherwise use complex query
         if (searchTerm == null || searchTerm.trim().isEmpty()) {
-            resources = studyResourceRepository.findByBasicFilters(
+            resources = studyResourceRepository.findNonQpaperByBasicFilters(
                     semester, department, regulation, subjectName);
         } else {
             try {
-                resources = studyResourceRepository.searchStudyResources(
+                resources = studyResourceRepository.searchNonQpapers(
                         semester, department, regulation, subjectName, searchTerm);
             } catch (Exception e) {
                 System.out.println("Complex search failed, falling back to basic search: " + e.getMessage());
-                resources = studyResourceRepository.findByBasicFilters(
+                resources = studyResourceRepository.findNonQpaperByBasicFilters(
                         semester, department, regulation, subjectName);
             }
         }

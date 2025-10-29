@@ -100,4 +100,72 @@ public interface StudyResourceRepository extends JpaRepository<StudyResource, Lo
         @Param("department") String department,
         @Param("regulation") String regulation,
         @Param("subjectName") String subjectName);
+
+    /**
+     * Simple search for study resources only (exclude qpapers by filePath prefix)
+     */
+    @Query("SELECT sr FROM StudyResource sr JOIN sr.subject s WHERE " +
+           "(sr.filePath NOT LIKE '/uploads/qpaper%') AND " +
+           "(:semester IS NULL OR sr.semester = :semester) AND " +
+           "(:department IS NULL OR sr.department = :department) AND " +
+           "(:regulation IS NULL OR sr.regulation = :regulation) AND " +
+           "(:subjectName IS NULL OR s.name = :subjectName)")
+    List<StudyResource> findNonQpaperByBasicFilters(
+        @Param("semester") Integer semester,
+        @Param("department") String department,
+        @Param("regulation") String regulation,
+        @Param("subjectName") String subjectName);
+
+    /**
+     * Complex search for study resources only (exclude qpapers by filePath prefix)
+     */
+    @Query("SELECT sr FROM StudyResource sr JOIN sr.subject s WHERE " +
+           "(sr.filePath NOT LIKE '/uploads/qpaper%') AND " +
+           "(:semester IS NULL OR sr.semester = :semester) AND " +
+           "(:department IS NULL OR sr.department = :department) AND " +
+           "(:regulation IS NULL OR sr.regulation = :regulation) AND " +
+           "(:subjectName IS NULL OR s.name = :subjectName) AND " +
+           "(:searchTerm IS NULL OR LOWER(sr.contributorName) LIKE LOWER(:searchTerm) OR " +
+           "LOWER(sr.description) LIKE LOWER(:searchTerm) OR " +
+           "LOWER(s.name) LIKE LOWER(:searchTerm))")
+    List<StudyResource> searchNonQpapers(
+        @Param("semester") Integer semester,
+        @Param("department") String department,
+        @Param("regulation") String regulation,
+        @Param("subjectName") String subjectName,
+        @Param("searchTerm") String searchTerm);
+
+    /**
+     * Simple search limited to question papers only (by filePath prefix)
+     */
+    @Query("SELECT sr FROM StudyResource sr JOIN sr.subject s WHERE " +
+           "sr.filePath LIKE '/uploads/qpaper%' AND " +
+           "(:semester IS NULL OR sr.semester = :semester) AND " +
+           "(:department IS NULL OR sr.department = :department) AND " +
+           "(:regulation IS NULL OR sr.regulation = :regulation) AND " +
+           "(:subjectName IS NULL OR s.name = :subjectName)")
+    List<StudyResource> findQpapersByBasicFilters(
+        @Param("semester") Integer semester,
+        @Param("department") String department,
+        @Param("regulation") String regulation,
+        @Param("subjectName") String subjectName);
+
+    /**
+     * Complex search limited to question papers only (by filePath prefix)
+     */
+    @Query("SELECT sr FROM StudyResource sr JOIN sr.subject s WHERE " +
+           "sr.filePath LIKE '/uploads/qpaper%' AND " +
+           "(:semester IS NULL OR sr.semester = :semester) AND " +
+           "(:department IS NULL OR sr.department = :department) AND " +
+           "(:regulation IS NULL OR sr.regulation = :regulation) AND " +
+           "(:subjectName IS NULL OR s.name = :subjectName) AND " +
+           "(:searchTerm IS NULL OR LOWER(sr.contributorName) LIKE LOWER(:searchTerm) OR " +
+           "LOWER(sr.description) LIKE LOWER(:searchTerm) OR " +
+           "LOWER(s.name) LIKE LOWER(:searchTerm))")
+    List<StudyResource> searchQpapers(
+        @Param("semester") Integer semester,
+        @Param("department") String department,
+        @Param("regulation") String regulation,
+        @Param("subjectName") String subjectName,
+        @Param("searchTerm") String searchTerm);
 }

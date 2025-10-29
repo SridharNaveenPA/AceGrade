@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CGPA Calculator - AceGrade</title>
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="study-resources.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+	<style>
+		/* Minimal page-specific styles (reuses site styles where possible) */
+		.calculator-container { max-width: 1100px; margin: 40px auto; padding: 20px; }
+		.section-card { background: #11131a; border: 1px solid #1e2230; border-radius: 14px; padding: 16px; margin-bottom: 16px; }
+		.flex { display: flex; gap: 12px; flex-wrap: wrap; }
+		.field { display: flex; flex-direction: column; gap: 6px; min-width: 180px; }
+		.field label { color: #c9d1d9; font-size: 14px; }
+		.field input, .field select { background: #0e1117; border: 1px solid #2a3142; color: #e6edf3; padding: 10px 12px; border-radius: 10px; outline: none; }
+		.field input:focus, .field select:focus { border-color: #3b82f6; }
+		.controls { display: flex; gap: 10px; align-items: center; }
+		.button { background: #2563eb; color: white; border: none; border-radius: 10px; padding: 10px 14px; cursor: pointer; }
+		.button.secondary { background: #334155; }
+		.button.icon { display: inline-flex; align-items: center; gap: 6px; }
+		.semester { border: 1px dashed #2a3142; padding: 12px; border-radius: 12px; background: #0c0f15; }
+		.semester-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+		.courses { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; align-items: start; }
+		.course-row { display: contents; }
+		.course-actions { grid-column: 1 / -1; display: flex; gap: 8px; margin: 6px 0 10px; }
+		.remove-btn { background: #7f1d1d; }
+		.result-card { background: #0b1220; border: 1px solid #1f2a44; padding: 16px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; }
+		.result-value { font-size: 32px; font-weight: 700; color: #22c55e; }
+		.toggle { display: inline-flex; align-items: center; gap: 8px; color: #cbd5e1; }
+		.small { font-size: 12px; color: #94a3b8; }
+	</style>
+</head>
+<body>
+	<nav class="navbar">
+		<div class="nav-brand">
+			<a href="index.html">AceGrade</a>
+		</div>
+		<div class="nav-links">
+			<a href="dashboard.html">Dashboard</a>
+			<a href="login.html">Logout</a>
+		</div>
+	</nav>
+
+	<div class="calculator-container">
+		<div class="filter-section" style="margin-bottom: 16px;">
+			<h2>CGPA Calculator</h2>
+		</div>
+
+		<!-- Current stats removed as requested -->
+
+		<!-- Semesters container -->
+		<div id="semesters"></div>
+
+		<div class="controls" style="margin: 12px 0 20px;">
+			<button id="add-semester" class="button icon"><i class="fas fa-layer-group"></i>Add Semester</button>
+		</div>
+
+		<!-- Result -->
+		<div class="result-card">
+			<div>
+				<div style="color:#cbd5e1;">Cumulative GPA</div>
+				<div class="small">GPA = Σ(grade_points × credits) / Σ(credits)</div>
+			</div>
+			<div class="result-value" id="cgpa">0.00/10</div>
+		</div>
+	</div>
+
+	<script>
+		(function() {
+			const gradeToPoints = {
+				"S": 10.0, "A+": 9.0, "A": 8.0,
+				"B+": 7.0, "B": 6.0, "C": 5,
+				"U": 0.0, "SA": 0.0, "WC": 1.7
+			};
+
+			const semestersEl = document.getElementById('semesters');
+			const addSemesterBtn = document.getElementById('add-semester');
+			const cgpaEl = document.getElementById('cgpa');
+
+			let semesterCount = 0;
+
+			function createCourseRow(semesterId) {
+				const row = document.createElement('div');
+				row.className = 'course-row';
+				row.innerHTML = `
+					<div class="field">
+						<label>Course Name</label>
+						<input type="text" class="course-name" placeholder="e.g., Data Structures">
+					</div>
+					<div class="field">
+						<label>Grade</label>
+						<select class="course-grade">
+							<option value="">Select</option>
+							<option>S</option><option>A+</option><option>A</option>
+							<option>B+</option><option>B</option><option>B</option>
+							<option>C</option><option>U</option><option>SA</option>
+							<option>WC</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>Credits</label>
+						<input type="number" min="0" step="0.5" class="course-credits" placeholder="e.g., 3">
+					</div>
+					<!-- weight column removed -->
+				`;
+				return row;
+			}
+
+			function addSemester() {
+				semesterCount += 1;
+				const sem = document.createElement('div');
+				sem.className = 'section-card semester';
+				sem.dataset.semesterId = String(semesterCount);
+				sem.innerHTML = `
+					<div class="semester-header">
+						<h3>Semester ${semesterCount}</h3>
+						<div class="controls">
+							<button class="button secondary icon add-course"><i class="fas fa-plus"></i>Add Course</button>
+							<button class="button secondary icon remove-semester"><i class="fas fa-trash"></i>Remove</button>
+						</div>
+					</div>
+					<div class="courses"></div>
+					<div class="course-actions">
+						<button class="button secondary icon add-course"><i class="fas fa-plus"></i>Add Course</button>
+					</div>
+				`;
+				semestersEl.appendChild(sem);
+				// add an initial row
+				sem.querySelector('.courses').appendChild(createCourseRow(semesterCount));
+				recalc();
+			}
+
+			function removeSemester(semEl) {
+				semEl.parentElement.removeChild(semEl);
+				recalc();
+			}
+
+			function recalc() {
+				let sumQualityPoints = 0;
+				let sumCredits = 0;
+
+				// iterate all courses
+				const courseRows = semestersEl.querySelectorAll('.course-row');
+				courseRows.forEach(row => {
+					const grade = (row.querySelector('.course-grade').value || '').trim();
+					const credits = parseFloat(row.querySelector('.course-credits').value || '0');
+					if (!grade || isNaN(credits) || credits <= 0) return;
+
+					const points = gradeToPoints[grade] ?? 0;
+					sumQualityPoints += points * credits;
+					sumCredits += credits;
+				});
+
+				const gpa = sumCredits > 0 ? (sumQualityPoints / sumCredits) : 0;
+				cgpaEl.textContent = gpa.toFixed(2);
+			}
+
+			// event bindings
+			addSemesterBtn.addEventListener('click', function() {
+				addSemester();
+			});
+
+			// delegate semester-level actions and input changes
+			semestersEl.addEventListener('click', function(e) {
+				const target = e.target;
+				if (!(target instanceof Element)) return;
+				const semEl = target.closest('.semester');
+				if (!semEl) return;
+
+				if (target.closest('.add-course')) {
+					semEl.querySelector('.courses').appendChild(createCourseRow(semEl.dataset.semesterId));
+					recalc();
+				}
+				if (target.closest('.remove-semester')) {
+					removeSemester(semEl);
+				}
+			});
+
+			// recalc whenever inputs change
+			semestersEl.addEventListener('input', function(e) {
+				recalc();
+			});
+
+			// initialize with one semester and one course
+			addSemester();
+		})();
+	</script>
+</body>
+</html>
+
+

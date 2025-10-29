@@ -10,6 +10,7 @@ com\acegrade\AceGradeApplication.class
 com\acegrade\dto\SubjectResponse.class
 com\acegrade\entity\StudyResource.class
 com\acegrade\repository\UserRepository.class
+com\acegrade\controller\QpaperController.class
 com\acegrade\dto\StudyResourceRequest.class
 com\acegrade\dto\LoginResponse.class
 com\acegrade\dto\StudyResourceResponse.class
