@@ -76,17 +76,13 @@ INSERT INTO subjects (name, course_code, semester, department, regulation) VALUE
 ('Software Engineering', 'CS303', 3, 'IT', 'R2019'),
 ('Operating Systems', 'CS304', 3, 'IT', 'R2019'),
 
--- R2023 IT Subjects
-('Mathematics I', 'MATH101', 1, 'IT', 'R2023'),
-('Physics', 'PHY101', 1, 'IT', 'R2023'),
-('Chemistry', 'CHEM101', 1, 'IT', 'R2023'),
-('English', 'ENG101', 1, 'IT', 'R2023'),
-('Python Programming', 'CS101', 1, 'IT', 'R2023'),
-('Mathematics II', 'MATH102', 2, 'IT', 'R2023'),
-('Data Structures and Algorithms', 'CS201', 2, 'IT', 'R2023'),
-('Digital Electronics', 'ECE201', 2, 'IT', 'R2023'),
-('English II', 'ENG102', 2, 'IT', 'R2023'),
-('Environmental Science', 'ENV101', 2, 'IT', 'R2023'),
+-- R2023 IT Subjects (Semester 5)
+('Web Technology', 'IT23501', 5, 'IT', 'R2023'),
+('Compiler Design', 'IT23502', 5, 'IT', 'R2023'),
+('Computer Networks', 'IT23503', 5, 'IT', 'R2023'),
+('Machine Learning', 'IT23504', 5, 'IT', 'R2023'),
+('Advanced DBMS', 'IT23505', 5, 'IT', 'R2023'),
+
 
 -- R2019 CT Subjects
 ('Mathematics I', 'MATH101', 1, 'CT', 'R2019'),
@@ -118,10 +114,10 @@ ON CONFLICT (name, semester, department, regulation) DO NOTHING;
 
 -- Insert sample study resources
 INSERT INTO study_resources (subject_id, contributor_name, description, file_name, file_path, file_size, download_count, semester, department, regulation, uploaded_by) VALUES
-(7, 'Gagneet Kaur', 'Week 1-10', 'data_structures_notes.pdf', '/uploads/data_structures_notes.pdf', 2048576, 9394, 2, 'IT', 'R2019', 1),
-(11, 'Puneet', 'Week 1-12', 'computer_networks_notes.pdf', '/uploads/computer_networks_notes.pdf', 1536000, 8046, 3, 'IT', 'R2019', 2),
-(1, 'Puneet Prasar', 'Week 1-4', 'mathematics_notes.pdf', '/uploads/mathematics_notes.pdf', 1024000, 5367, 1, 'IT', 'R2019', 3),
-(15, 'Thallam Visit', 'Week 1-12', 'operating_systems_notes.pdf', '/uploads/operating_systems_notes.pdf', 3072000, 4380, 3, 'IT', 'R2019', 4);
+(7, 'Vetri', 'Week 1-10', 'data_structures_notes.pdf', '/uploads/data_structures_notes.pdf', 2048576, 9394, 2, 'IT', 'R2019', 1),
+(11, 'Srivingnesh', 'Week 1-12', 'computer_networks_notes.pdf', '/uploads/computer_networks_notes.pdf', 1536000, 8046, 3, 'IT', 'R2019', 2),
+(1, 'Gowtham', 'Week 1-4', 'mathematics_notes.pdf', '/uploads/mathematics_notes.pdf', 1024000, 5367, 1, 'IT', 'R2019', 3),
+(15, 'Sathya', 'Week 1-12', 'operating_systems_notes.pdf', '/uploads/operating_systems_notes.pdf', 3072000, 4380, 3, 'IT', 'R2019', 4);
 
 -- Verify data insertion
 SELECT * FROM users;
